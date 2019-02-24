@@ -1,4 +1,4 @@
-lass highArray {
+class highArray {
     private int[] arr;
     private int nElemen;
 
