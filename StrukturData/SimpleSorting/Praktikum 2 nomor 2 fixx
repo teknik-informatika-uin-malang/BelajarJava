@@ -1,0 +1,200 @@
+class Mahasiswa {
+
+    private long nim;
+    private String nama;
+    private String asal;
+
+    public Mahasiswa(long nim, String nama, String asal) {
+        this.nim = nim;
+        this.nama = nama;
+        this.asal = asal;
+    }
+
+    public void displayMhs() {
+        System.out.print("\tNIM : " + nim);
+        System.out.print(", Nama : " + nama);
+        System.out.println(", Asal : " + asal);
+    }
+
+    public long getNim() {
+        return nim;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+}
+
+class DataArray {
+
+    private Mahasiswa[] mhs;
+    private int nElemen;
+
+    public DataArray(int max) {
+        mhs = new Mahasiswa[max];
+        nElemen = 0;
+    }
+
+    public Mahasiswa find(long searchNim) {
+        int i;
+        for (i = 0; i < nElemen; i++) {
+            if (mhs[i].getNim() == searchNim) {
+                break;
+            }
+        }
+
+        if (i == nElemen) {
+            return null;
+        } else {
+            return mhs[i];
+        }
+    }
+
+    public void insert(long nim, String nama, String asal) {
+        mhs[nElemen] = new Mahasiswa(nim, nama, asal);
+        nElemen++;
+    }
+
+    public boolean delete(long searchNim) {
+        int i;
+        for (i = 0; i < nElemen; i++) {
+            if (mhs[i].getNim() == searchNim) {
+                break;
+            }
+        }
+        if (i == nElemen) {
+            return false;
+        } else {
+            for (int j = i; j < nElemen; j++) {
+                mhs[j] = mhs[j + 1];
+            }
+            nElemen--;
+            return true;
+        }
+
+    }
+
+    public void displayArray() {
+        for (int i = 0; i < nElemen; i++) {
+            mhs[i].displayMhs();
+        }
+    }
+
+    public void SelectionSort() {
+        int out, in, min;
+        for (out = 0; out < nElemen; out++) {
+            min = out;
+            for (in = out + 1; in < nElemen; in++) {
+                if (mhs[in].getNim() < mhs[min].getNim()) {
+                    min = in;
+                }
+            }
+            swap(out, min);
+        }
+        displayArray();
+    }
+
+    public void BubbleSort() {
+        int batas, i;
+        for (batas = nElemen - 1; batas > 0; batas--) {
+            for (i = 0; i < batas; i++) {
+                if (mhs[i].getNim() >= mhs[i + 1].getNim()) {
+
+                    swap(i, i + 1);
+                }
+            }
+        }
+        displayArray();
+    }
+    public void InsertionSort(){
+        int i, curIn;
+        
+        for (curIn=1;curIn<nElemen;curIn++){
+            Mahasiswa temp= mhs[curIn];
+            i = curIn;
+            while (mhs[i-1].getNim()>mhs[curIn].getNim() && i>0){
+                mhs[i]=mhs[i-1];
+                i--;
+            }
+            mhs[i] = temp;
+            }
+        }
+    
+
+    public void SelectionSortbyName() {
+        int awal, i, min = 0;
+        for (awal = 0; awal < nElemen; awal++) {
+            min = awal;
+            for (i = awal; i < nElemen; i++) {
+
+                if (mhs[i].getNama().compareTo(mhs[min].getNama()) < 0) {
+
+                    min = i;
+                }
+            }
+            swap(awal, min);
+        }
+        displayArray();
+    }
+
+    void InsertionSortbyName() {
+        for (int i = 1; i < nElemen; ++i) {
+            String key = mhs[i].getNama();
+            int j = i - 1;
+            System.out.println(j);
+            while (j >= 0 && mhs[j].getNama().compareTo(key) > 0) {
+                mhs[j + 1] = mhs[j];
+                j = j - 1;
+            }
+            mhs[j + 1] = mhs[i];
+        }
+        displayArray();
+    }
+
+    public void swap(int one, int two) {
+        Mahasiswa temp = mhs[one];
+        mhs[one] = mhs[two];
+        mhs[two] = temp;
+    }
+}
+
+class DataArrayApp {
+
+    public static void main(String[] args) {
+        int maxSize = 100;
+        DataArray arr;
+        arr = new DataArray(maxSize);
+        arr.insert(16650200, "Jundi", "Malang");
+        arr.insert(16650280, "Ahmad", "Sidoarjo");
+        arr.insert(16650230, "Ismail", "Banyuwangi");
+        arr.insert(16650270, "Sofi", "Semarang");
+        arr.insert(16650240, "Dinda", "Bandung");
+        arr.insert(16650200, "Rais", "Ambon");
+        arr.insert(16650210, "Helmi", "Madura");
+        arr.insert(16650250, "Agung", "Madiun");
+        arr.insert(16650280, "Arina", "Malang");
+
+        arr.displayArray();
+
+        System.out.println("Menggunakan BubbleSort ");
+        arr.BubbleSort();
+        arr.displayArray();
+
+        System.out.println("Menggunakan SelectionSort ");
+        arr.SelectionSort();
+        arr.displayArray();
+        
+        System.out.println("Menggunakan InsertionSort");
+        arr.InsertionSort();
+        arr.displayArray();
+        
+        System.out.println("Menggunakan SelectionSortByName ;  ");
+        arr.SelectionSortbyName();
+        arr.displayArray();
+        
+        System.out.println("Menggunakan InsertionSortByName ; ");
+        arr.InsertionSortbyName();
+        arr.displayArray();
+    }
+
+}
