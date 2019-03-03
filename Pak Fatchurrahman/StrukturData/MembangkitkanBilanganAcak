@@ -1,0 +1,16 @@
+import java.util.*;
+import java.util.Random;
+public class BilRandom {
+    public static void main(String[] args) {
+        
+        log("Bilangan Acak = 1 - 100");
+        Random bilanganRandom = new Random();
+        for (int i = 1; i<=100; ++i){
+            int angkaAcak = bilanganRandom.nextInt(100);
+            log ("Bangkitkan Bilangan = "+angkaAcak);
+        }
+        }
+    private static void log (String pesan){
+        System.out.println(pesan);
+        }
+}
