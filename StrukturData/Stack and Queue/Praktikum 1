@@ -1,3 +1,4 @@
+import java.io.*;
 class Stack {
     private int maxSize;
     private Character[] stackArray;
@@ -10,6 +11,7 @@ class Stack {
     }
 
     public void push(Character item) {
+
         stackArray[++top] = item;
     }
 
@@ -32,5 +34,60 @@ class Stack {
 
         return (top == maxSize - 1);
 
+    }
+}
+class Pembalik {
+
+    public String PembalikKata(int size, String word) {
+        Stack theStack = new Stack(size);
+
+        // menambahkan karakter ke dalam stack
+        for (int i = 0; i < word.length(); i ++)
+        {
+            theStack.push(word.charAt(i));
+        }
+
+        // mengeluarkan karakter dari stack
+        String out = "";
+        while (!theStack.isEmpty())
+        {
+            out += theStack.pop();
+
+        }
+
+
+        return out;
+    }
+}
+public class AppPembalik {
+    public static void main(String[] args) throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+        // soal a
+        System.out.println(">> katanya ...");
+        String kata = "kasur";
+
+        int size = kata.length();
+
+        Pembalik pembalik = new Pembalik();
+
+        // memanggil method dari class pembalik
+        System.out.println(">> dibalik jadi ...");
+        System.out.println(pembalik.PembalikKata(size, kata));
+
+
+        // Soal B
+        while (true) {
+            System.out.print("Masukkan Kata : ");
+            kata = input.readLine();
+
+            size = kata.length();
+
+            pembalik = new Pembalik();
+
+            // memanggil method dari class pembalik
+            System.out.print("Kebalikan : ");
+            System.out.println(pembalik.PembalikKata(size, kata));
+        }
     }
 }
