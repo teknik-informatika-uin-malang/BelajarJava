@@ -1,0 +1,114 @@
+class Link {
+ public int Data;
+ public Link next;
+    
+ 
+ public Link (int Data){
+     this.Data = Data;
+ }
+ public void displayLink(){
+     System.out.print(Data+" ");
+ }
+ }
+class LinkedList {
+    private Link first;
+    public LinkedList(){
+        first = null;
+        
+    }
+    public boolean isEmpty (){
+        return (first ==null);
+    }
+    public void insertFirst (int Data){
+        Link newlink =  new Link (Data);
+        newlink.next= first;
+        first = newlink;
+    }
+    public Link deleteFirst(){
+        Link temp = first;
+        first = first.next;
+        return temp;
+    }
+    public Link find (int key){
+        Link current = first;
+        while (current.Data != key){
+        if (current.next==null){
+            return null;
+        }else{
+            current=current.next;
+        }
+        
+    }
+        return current;
+    }
+    public Link delete (int key){
+        Link current  = first;
+        Link previous = first;
+        while (current.Data != key){
+            if (current.next == null){
+                return null;
+            }else{
+                previous = current;
+                current = current.next;
+            }
+        }
+        if (current == first){
+            first = first.next;
+        }else{
+            previous.next = current.next;
+        }
+        return current;
+    }
+    public void displayList(){
+        System.out.println("List(first-->last); ");
+        Link current = first;
+        while (current != null){
+            current.displayLink();
+            current = current.next;
+        }
+        System.out.println("");
+    }
+}
+public class LinkedListApp {
+    public static void main(String[] args) {
+        LinkedList thelist = new LinkedList();
+        
+        thelist.insertFirst(22);
+        thelist.insertFirst(44);
+        thelist.insertFirst(66);
+        thelist.insertFirst(88);
+        thelist.displayList();
+        
+        while (!thelist.isEmpty()){
+            Link aLink = 
+                    thelist.deleteFirst();
+            
+            System.out.print("Delete ");
+            aLink.displayLink();
+            System.out.println("");
+        }
+        thelist.displayList();
+        
+        thelist.insertFirst(33);
+        thelist.insertFirst(55);
+        thelist.insertFirst(77);
+        thelist.insertFirst(88);
+        thelist.displayList();
+        
+        Link f = thelist.find(77);
+        if (f !=null){
+            System.out.println("ketemu..."+f.Data);
+        }else{
+            System.out.println("Link tidak ditemukan");
+        }
+        Link d = thelist.delete(88);
+        if (d !=null){
+            System.out.println("hapus link dengan key"+ d.Data);
+            
+        }else{
+            System.out.println("Link tidak ditemukan");
+        }
+        thelist.displayList();
+    }
+    
+}
