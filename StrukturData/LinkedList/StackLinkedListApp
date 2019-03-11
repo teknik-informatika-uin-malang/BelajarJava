@@ -1,0 +1,63 @@
+class Stack{
+    int id;
+    String nama;
+    Stack link;
+}
+class StackLinkedList{
+    Stack top;
+    public StackLinkedList(){
+        this.top = null;
+    }
+    public void push (int id, String nama){
+        Stack stack = new Stack();
+        
+        if (stack == null){
+            System.out.println("Stack penuh !!!");
+            return;
+        }
+        stack.id = id;
+        stack.nama = nama;
+        stack.link = top;
+        top =stack;
+    }
+    public boolean isEmpty(){
+        return (top == null);
+    }
+    public void pop (){
+        top = (top).link;
+    }
+    public void display (){
+        Stack stack = top;
+        
+        System.out.println("Stack(top-->bottom) ;");
+        while (stack != null){
+            System.out.print("{"+stack.id+","+stack.nama+"}");
+          System.out.println();
+        
+            stack = stack.link;
+    }
+        System.out.println();
+}
+}
+public class StackLinkedListApp {
+    public static void main(String[] args) {
+        StackLinkedList stack = new StackLinkedList();
+        
+        stack.push(1, "VCD");
+        stack.push(2, "TV");
+        
+        stack.display();
+        
+        stack.push(3, "Kulkas");
+        stack.push(4, "PC");
+        stack.push(5, "Rice Cooker");
+        stack.push(6, "Dispenser");
+        
+        stack.display();
+        
+        stack.pop();
+        stack.pop();
+        
+        stack.display();
+    }
+}
