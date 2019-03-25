@@ -1,0 +1,8 @@
+public class Praktikum_3 {
+    public static void main(String[] args) {
+        System.out.println("Apakah anda tahu kalau program ini benar ?");
+        System.out.println("Sebenarnya program ini benar");
+        System.out.println("kenapa harus diteliti lagi ?");
+        System.out.println("Kamu tahu jawabannya ?");
+    }
+}
