@@ -1,0 +1,121 @@
+class Mahasiswa {
+    private String nama;
+    private int nilai;
+
+    public Mahasiswa(String name, int assignment) {
+        this.nama = name;
+        this.nilai = assignment;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public int getNilai() {
+        return nilai;
+    }
+
+    @Override
+    public String toString() {
+        return "Mahasiswa{" + "name=" + nama + ", assignment=" + nilai + '}';
+    }
+    
+    
+    
+}
+
+class Link {
+   
+    private Mahasiswa mhs;
+    Link next;
+    Link prev;
+
+    public Link(Mahasiswa data) {
+        this.mhs = data;
+    }
+
+    public Mahasiswa getMhs() {
+        return mhs;
+    }
+    
+}
+
+class LinkList {
+
+    private Link first;
+
+//  desc sort and  insert
+    public void add(Mahasiswa data) {
+        Link newLink = new Link(data);
+
+//        data = 0
+        if (first == null) {
+            first = newLink;
+        } 
+//        data = 1
+        else if (first.next == null) {
+//            new>first
+            if (newLink.getMhs().getNilai() > first.getMhs().getNilai()) {
+                newLink.next = first;
+                first.prev = newLink;
+                first = newLink;
+            } else {
+                first.next = newLink;
+                newLink.prev = first;
+            }
+
+        } 
+//        data > 1
+        else {
+            Link pointer = first;
+            while (pointer.next!=null&&pointer.next.getMhs().getNilai()>newLink.getMhs().getNilai()) {
+                pointer = pointer.next;
+            }
+//            swap
+            newLink.next = pointer.next;
+            newLink.prev = pointer;
+            pointer.next = newLink;
+        }
+
+    }
+
+    public void display() {
+        Link current = first;
+        while (current != null) {
+            System.out.println(current.getMhs());
+            current = current.next;
+        }
+    }
+
+    public void displayTop(int n) {
+        Link current = first;
+        int i = 0;
+        while (current != null && i < n) {
+            System.out.println(current.getMhs());
+            current = current.next;
+            i++;
+        }
+    }
+
+}
+
+public class EvenApp {
+    
+    public static void main(String[] args) {
+        
+        LinkList list = new LinkList();
+        
+        list.add(new Mahasiswa("Riza", 80));
+        list.add(new Mahasiswa("Ahmad", 90));
+        list.add(new Mahasiswa("Ferguso", 30));
+        list.add(new Mahasiswa("Rodrigo", 10));
+        list.add(new Mahasiswa("Antonio", 40));
+        list.add(new Mahasiswa("Antonio", 10));
+        
+        list.display();
+        list.add(new Mahasiswa("Bambang", 50));
+        System.out.println("-----------");
+        list.displayTop(5);
+    }
+    
+}
