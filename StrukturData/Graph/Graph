@@ -129,3 +129,5 @@ public void topo(){
     }
     }
 }
+//masih error pada deleteVertex dan sortedArray
+//warning error in deleteVertex and SortedArray
